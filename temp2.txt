@@ -1,0 +1,22 @@
+mongod --dbpath 1 --port 27001 --smallfiles --oplogSize 50
+mongod --dbpath 2 --port 27002 --smallfiles --oplogSize 50
+mongod --dbpath 3 --port 27003 --smallfiles --oplogSize 50
+
+
+cfg = {
+_id:"ABC",
+members:[
+	{	_id:0, host:"localhost:27001"},
+	{	_id:1, host:"localhost:27002"},
+	{	_id:2, host:"localhost:27003"}
+	]
+}
+
+
+mongod --dbpath 4 --port 27004 --smallfiles --oplogSize 50 --replSet SCS
+
+
+start mongod --shardsvr --dbpath week6.0 --logpath log.week6.0 --port 27000 --logappend --smallfiles --oplogSize 50
+
+
+mongo --shell localhost:27000/week6 week6.js

@@ -1,0 +1,18 @@
+
+
+--db.MySeq.insert({_id:"names",seq:0});
+
+function getNextSeq(name) {
+   var ret = db.MySeq.findAndModify(
+          {
+            query: { _id: name },
+            update: { $inc: { seq: 1 } },
+            new: true,
+			upsert:true
+          }
+   );
+   return ret.seq;
+}
+
+
+db.names.insert({_id:getNextSeq("names"),name:"George"})

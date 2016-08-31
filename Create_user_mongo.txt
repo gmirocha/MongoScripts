@@ -1,0 +1,28 @@
+S:\>mongo localhost/test
+MongoDB shell version: 3.0.2
+connecting to: localhost/test
+var me={user:'cdba',pwd:'maravm',roles:['userAdminAnyDatabase']}
+use admin
+db.createUser(me)
+--Successfully added user: { "user" : "gmirocha", "roles" : [ "userAdminAnyDatabase" ] }
+ 
+db.grantRolesToUser('cdba',[{role:'readWriteAnyDatabase',db:'admin'}])
+
+
+var mara={user:'mara',pwd:'test123',roles:[{role:'read',db:'test'}]}
+
+-- create  role
+
+var myRole={
+createRole:"customRW",
+privileges:[{resource:{db:'test',collection:'names'},actions:['find','insert','update']}],
+roles:[{role:'read',db:'test2'}]
+}
+
+var myRole={
+createRole:"customRW",
+privileges:[{resource:{db:'test',collection:'names'},actions:['find','insert','update']}],
+roles:[{role:'read',db:'test'}]
+}
+
+--scons-ssl

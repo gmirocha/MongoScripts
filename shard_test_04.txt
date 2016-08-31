@@ -1,0 +1,23 @@
+
+
+grilled.indigo.papaya
+
+
+'{"_id": 1, "l": {"$not": 1}}'
+
+mlogfilter --namespace 'grilled.indigo.papaya' --pattern '{"_id": 1, "l": {"$not": 1}}' mtools_example.log
+
+Your results will have their axes labeled. Examine the highest peak. You can either compare it to the y-axis, or click on it to find out the value.
+Your question is this: What is the number of these operations during that one-second bin with the highest peak?
+Hint: If you're unfamiliar with the bash commands, you might want, as an intermediate step, to create a new log file. By default, mlogfilter sends its results to stdout, but you can redirect it to a new file by appending > newfile_name to the end of the command.
+
+
+mlogfilter --namespace 'grilled.indigo.papaya' --pattern '{"_id": 1, "l": {"$not": 1}}' mtools_example.log|mplotqueries --type histogram --group pattern -b 1
+
+FOR /L %variável IN (início,incremento,fim) DO comando [comando-parâmetros]
+
+    O conjunto é uma sequência de números de início ao fim, por quantidade de
+    incremento. Portanto, (1,1,5) geraria a sequência 1 2 3 4 5 e (5,-1,1)
+    geraria a sequência (5 4 3 2 1)
+	
+FOR /L %i in (2,-1,0) do echo %i	

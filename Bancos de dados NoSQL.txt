@@ -1,0 +1,36 @@
+O que são bancos de dados NoSQL?
+São bancos de dados facilmente escaláveis horizontalmente, podem trabalhar com quantidades de dado maciças gigantescas e não utilizam um modelo relacional para suas estruturas de dados. Não utilizam linguagem SQL nativa (algumas versões possuem "translators" de SQL para NoSQL).
+No Schema
+
+
+ACID - NoSQL não respeita caracteristicas ACID
+ACID? = Conjunto de propriedades que garantem a consistência dos dados. 
+ACID= ATOMICIDADE, Consistência, Isolamento e Durabilidade.
+
+ATOMICIDADE =  Capacidade de controle transacional. Ou todas atividades (Operações) da transação são executadas, ou nenhuma delas.
+Consistência = Garantia de que antes e depois da transação a base de dados deve estar consistênte.
+Isolamento = Capacidade de "anonimato" de uma transação até sua efetivação.
+Durabilidade = Garantia de que, após efetivação da transação, a mesma seja persistida e não seja desfeita.
+
+
+BASE = Basically Available, Soft State, Eventual Consistency
+
+Alta performance
+Alta disponibilidade
+Particionamento fácil 
+
+Scale Out/Scale UP
+
+Tipos de Bancos de dados NoSQL:
+ - Chave/Valor: Simples associação de chave a um valor. (Ex: key:1, value:"Valor 1").
+	Métodos: PUT(Chave, Valor) e GET(Chave)
+	Exemplos: Amazon DynamoDB, Azure, Redis, Riak, Genie, etc...
+ - Documento: parecido como Chave/Valor, mas possuindo em seu valor uma estrutura definida (XML, JSON, etc.). Ex: {_id:1,name:"Valor 1",types:[1,2,4]}
+	Exemplos: CouchDB, MongoDB, Amazon DynamoDB
+ - Grafo: Registros relacionados em forma de vertices (Arestas). Relacionamento entre registros.
+	Exemplos: Redes sociais:
+ - Tabular
+ - Outros
+
+
+Mitos sobre NoSQL: Não necessitamos mais de DBAs!, Baixo Custo, 

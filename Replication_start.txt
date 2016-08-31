@@ -1,0 +1,13 @@
+"192.168.2.190:27004"
+
+mongod --dbpath MyRep01_db1 --port 27201 --smallfiles --oplogSize 80 --replSet MyRep01
+
+mongod --dbpath MyRep01_db2 --port 27202 --smallfiles --oplogSize 80 --replSet MyRep01
+
+mongod --dbpath 3 --port 27003 --smallfiles --oplogSize 80 --replSet MyRep01
+
+
+D:\: => M:\Course\chapter_4_replication.5ec778f9a288\homework_4_1\replication
+
+
+subst d: "M:\Course\chapter_4_replication.5ec778f9a288\homework_4_1\replication"

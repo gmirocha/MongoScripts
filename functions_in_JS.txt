@@ -1,0 +1,40 @@
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+
+db.system.js.save(
+	{
+		_id:'mysleep',
+		value: 
+			function(milliseconds) {
+			  var start = new Date().getTime();
+			  for (var i = 0; i < 1e7; i++) {
+				if ((new Date().getTime() - start) > milliseconds){
+				  break;
+				}
+			  }
+			}
+	}
+)
+db.loadServerScripts();
+
+db.a.save(
+_id:'increase',
+value:db.a.update({_id:this._id},{$inc:{votos:1}});
+)
+
+
+
+
+host = ;
+
+prompt = function() {
+             return db+"@"+db.serverStatus().host+"$ ";
+         }
+

@@ -1,0 +1,46 @@
+var a = connect("localhost:27001/admin");
+a.shutdownServer()
+rs.status()
+
+db.foo.insert( { _id : 4 } )
+db.foo.insert( { _id : 5 } )
+db.foo.insert( { _id : 6 } )
+
+
+db.foo.drop()
+db.foo.insert( { _id : 1 }, { writeConcern : { w : 2 } } )
+db.foo.insert( { _id : 2 }, { writeConcern : { w : 2 } } )
+db.foo.insert( { _id : 3 }, { writeConcern : { w : 2 } } )
+var a = connect("localhost:27001/admin");
+a.shutdownServer()
+rs.status()
+db.foo.insert( { _id : 4 } )
+db.foo.insert( { _id : 5 } )
+db.foo.insert( { _id : 6 } )
+
+
+var a = connect("localhost:27003/test");
+
+start mongod --shardsvr --dbpath ns1 --logpath log.nS1 --port 27501 --logappend --smallfiles --oplogSize 50
+start mongod --shardsvr --dbpath ns2 --logpath log.nS2 --port 27601 --logappend --smallfiles --oplogSize 50
+
+
+s.save({ "_id" : "s1", "host" : "localhost:27501" })
+s.save({ "_id" : "s2", "host" : "localhost:27601" })
+
+
+
+{ "_id" : "s2", "host" : "s2/genome_svr4:27601,genome_svr5:27602,genome_svr5:27603" }
+
+
+
+use snps
+var x = db.elegans.aggregate( [ { $match : { N2 : "T" } } , { $group : { _id:"$N2" , n : { $sum : 1 } } } ] ).next(); print( x.n )
+
+
+db.createCollection("mylog", { capped : true, size : 8*1024, max : 80 } )
+
+db.runCommand( {"collMod" : "ttltest", "index" : {"keyPattern" : {"created" : 1 } , "expireAfterSeconds" : 600 } } )
+
+
+

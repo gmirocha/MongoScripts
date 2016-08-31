@@ -1,0 +1,23 @@
+shards
+
+removendo um shard:
+
+use admin
+db.runCommand( { removeShard: "D" } )
+
+listar os shards
+db.adminCommand( { listShards: 1 } )
+
+-- Split the shard key 
+
+for ( var x=97; x<97+26; x++ ){
+  for( var y=97; y<97+26; y+=6 ) {
+    var prefix = String.fromCharCode(x) + String.fromCharCode(y);
+    db.runCommand( { split : "myapp.users" , middle : { email : prefix } } );
+  }
+}
+
+mongod --port 27001 --replSet MyRep01 --dbpath MyRep01_db1 --logpath MyRep01_db1/MyRep01_db1.log --oplogSize 80 --smallfiles --fork
+
+mongod --shardsvr --replSet R3 --dbpath S1R3 --logpath log.S1R3 --port 27000 --logappend --smallfiles --oplogSize 80 --fork
+mongod --shardsvr --replSet R3 --dbpath S2R3 --logpath log.S2R3 --port 27001 --logappend --smallfiles --oplogSize 80 --fork

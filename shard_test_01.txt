@@ -1,0 +1,28 @@
+
+
+a={
+_id:13,
+name:"George Gustavo Mirocha",
+rg:268987361,
+cpf:26745687801,
+hobies:["Trompete","Tiro","Vinho"],
+trompetes:[{af:"bb",brand:"Sonaré"},{af:"c",brand:"B&S"},{af:"bb",brand:"Jupiter",type:"pocket"}]
+}
+
+
+db.createCollection("users")
+
+db.users.ensureIndex({class:1,_id:1})
+
+> sh.enableSharding("ggm")
+{ "ok" : 1 }
+> sh.shardCollection("ggm.users",{class:1,_id:1})
+{ "collectionsharded" : "ggm.users", "ok" : 1 }
+>
+
+
+for(i=1;i<=10000;i++){
+		db.users.insert({_id:i,class:m[i%4],reg:a})
+}
+
+

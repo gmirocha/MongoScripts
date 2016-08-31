@@ -1,0 +1,29 @@
+
+
+mongod --shardsvr --dbpath S1 --logpath S1.log --logappend --oplogSize 80 --port 31001 --fork
+mongod --shardsvr --dbpath S2 --logpath S2.log --logappend --oplogSize 80 --port 31002 --fork
+mongod --shardsvr --dbpath S0 --logpath S0.log --logappend --oplogSize 80 --port 31000 --fork
+mongod --configsvr --dbpath CG --logpath CG.log --logappend --port 31100 --fork
+
+mongos --configdb m202-ubuntu1404:31100 --logpath mongos.log --maxConns 60 --chunkSize 1 --fork
+
+
+
+--
+
+{ addShard: "<hostname><:port>", maxSize: <size>, name: "<shard_name>" }
+
+db.runCommand({addShard: "m202-ubuntu1404:31000",name:"shard0"})
+db.runCommand({addShard: "m202-ubuntu1404:31001",name:"shard1"})
+db.runCommand({addShard: "m202-ubuntu1404:31002",name:"shard2"})
+
+mongo --nodb
+config = { 
+	d0 : { smallfiles : "", noprealloc : "", nopreallocj : ""}, 
+	d1 : { smallfiles : "", noprealloc : "", nopreallocj : "" }, 
+	d2 : { smallfiles : "", noprealloc : "", nopreallocj : ""}
+};
+cluster = new ShardingTest( { shards : config } );
+
+     tag: LTS  { "createdDate" : ISODate("2013-10-01T00:00:00Z") } -->> { "createdDate" : ISODate("2014-01-01T00:00:00Z") }
+                         tag: STS  { "createdDate" : ISODate("2014-01-01T00:00:00Z") } -->> { "createdDate" : ISODate("2014-05-01T00:00:00Z") }
